@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
-=======
+
 
 resources :restaurants
 
->>>>>>> 2268246c1801b3b561456664598f20ea3729ce23
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
