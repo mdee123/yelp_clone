@@ -69,9 +69,8 @@ feature 'restaurants' do
 
     before do
       sign_up('email@email.com')
+      create_restaurant('KFC')
     end
-
-    before {Restaurant.create name: 'KFC'}
 
     scenario 'let a user edit a restaurant' do
       visit '/restaurants'
@@ -87,9 +86,8 @@ feature 'restaurants' do
 
     before do
       sign_up('email@email.com')
+      create_restaurant('KFC')
     end
-
-    before { Restaurant.create name: 'KFC'}
 
     scenario 'removes a restaurant when a user clicks on a delete link' do
       visit '/restaurants'
@@ -108,9 +106,20 @@ feature 'restaurants' do
       expect(page).to have_content 'You need to sign in or sign up before continuing.'
     end
 
+    scenario 'user cannot edit a restraurant they haven\'t created' do
+      sign_up('email@email.com')
+      create_restaurant('KFC')
+      sign_out
+      sign_up('test@email.com')
+      expect(page).not_to have_content 'Edit'
+    end
+
+    scenario 'user cannot delete a restraurant they haven\'t created' do
+      sign_up('email@email.com')
+      create_restaurant('KFC')
+      sign_out
+      sign_up('test@email.com')
+      expect(page).not_to have_content 'Delete'
+    end
   end
-
-
-
-
 end
