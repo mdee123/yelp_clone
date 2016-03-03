@@ -6,6 +6,7 @@ group :test do
 	gem 'rspec-collection_matchers'
 end
 
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'devise'
 gem 'omniauth-facebook'
 

@@ -23,8 +23,7 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
 
-  config.omniauth :facebook, Rails.application.secrets.facebook_app_id, Rails.application.secrets.facebook_app_secret,
-                  callback_url: 'http://localhost:3000/'
+  config.omniauth :facebook, Rails.application.secrets.facebook_app_id, Rails.application.secrets.facebook_app_secret
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
