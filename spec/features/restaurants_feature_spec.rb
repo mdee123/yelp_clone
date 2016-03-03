@@ -3,6 +3,8 @@ require 'rails_helper'
 feature 'restaurants' do
 
   context 'no restaurants have been added' do
+
+
     scenario 'should display a prompt to add a restaurant' do
       visit '/restaurants'
       expect(page).to have_content 'No restaurants yet'
@@ -25,6 +27,10 @@ feature 'restaurants' do
 
   context 'creating restaurants' do
 
+    before do
+      sign_up_test
+    end
+
     scenario 'prompts user to fill out a form, then displays the new restaurant' do
       visit '/restaurants'
       click_link 'Add a restaurant'
@@ -45,9 +51,6 @@ feature 'restaurants' do
       end
     end
 
-
-
-
   end
 
   context 'viewing restaurants' do
@@ -64,6 +67,10 @@ feature 'restaurants' do
 
   context 'editing restaurants' do
 
+    before do
+      sign_up_test
+    end
+
     before {Restaurant.create name: 'KFC'}
 
     scenario 'let a user edit a restaurant' do
@@ -78,6 +85,10 @@ feature 'restaurants' do
 
   context 'deleting restaurants' do
 
+    before do
+      sign_up_test
+    end
+
     before { Restaurant.create name: 'KFC'}
 
     scenario 'removes a restaurant when a user clicks on a delete link' do
@@ -89,7 +100,24 @@ feature 'restaurants' do
 
   end
 
+  context 'user is not logged in' do
+
+    scenario 'user cannot create a restaurant' do
+      visit '/restaurants'
+      click_link 'Add a restaurant'
+      expect(page).to have_content 'You need to sign in or sign up before continuing.'
+    end
+
+  end
 
 
+  def sign_up_test
+    visit '/restaurants'
+    click_link 'Sign up'
+    fill_in 'Email', with: 'email@email.com'
+    fill_in 'Password', with: 'testpassword'
+    fill_in 'Password confirmation', with: 'testpassword'
+    click_button 'Sign up'
+  end
 
 end
