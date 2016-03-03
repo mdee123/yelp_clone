@@ -17,17 +17,23 @@ feature 'reviewing' do
   feature 'deleting a review' do
 
     before do
-      sign_up(email@email.com)
+      sign_up('email@email.com')
       create_restaurant('KFC')
+      create_review('KFC')
     end
 
-    scenario 'a user can only delete a review that they have writtten' do
-
-
+    scenario 'a user can only delete a review that they have written' do
+      click_link 'KFC'
+      click_link 'Delete Review'
+      expect(page).to have_content 'Review deleted successfully'
     end
 
-
+    scenario 'a user can\'t delete another user\'s review' do
+      sign_out
+      sign_up('test@email.com')
+      click_link 'KFC'
+      click_link 'Delete Review'
+      expect(page).to have_content 'You cannot delete another user\'s review'
+    end
   end
-
-
 end

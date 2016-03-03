@@ -10,7 +10,6 @@ class ReviewsController < ApplicationController
     @review = @restaurant.reviews.build_with_user review_params, current_user
 
     if @review.save
-    # @restaurant.reviews.create(review_params)
       redirect_to restaurants_path
     else
       if @review.errors[:user]
@@ -20,6 +19,18 @@ class ReviewsController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @review = Review.find(params[:id])
+    if current_user === @review.user
+      @review.destroy
+      flash[:notice] = 'Review deleted successfully'
+      redirect_to '/restaurants'
+    else
+      redirect_to restaurants_path, alert: 'You cannot delete another user\'s review'
+    end
+  end
+
 
   def review_params
     params.require(:review).permit(:thoughts, :rating)

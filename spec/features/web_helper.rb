@@ -13,3 +13,16 @@ def create_restaurant(name)
   fill_in 'Name', with: name
   click_button 'Create Restaurant'
 end
+
+def sign_out
+  visit '/restaurants'
+  click_link 'Sign out'
+end
+
+def create_review(restaurant)
+  visit "/restaurants"
+  click_link "Review #{restaurant}"
+  fill_in 'Thoughts', with: 'so so'
+  select '3', from: 'Rating'
+  click_button 'Leave Review'
+end
