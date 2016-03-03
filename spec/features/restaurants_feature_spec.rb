@@ -28,7 +28,7 @@ feature 'restaurants' do
   context 'creating restaurants' do
 
     before do
-      sign_up_test
+      sign_up('email@email.com')
     end
 
     scenario 'prompts user to fill out a form, then displays the new restaurant' do
@@ -68,7 +68,7 @@ feature 'restaurants' do
   context 'editing restaurants' do
 
     before do
-      sign_up_test
+      sign_up('email@email.com')
     end
 
     before {Restaurant.create name: 'KFC'}
@@ -86,7 +86,7 @@ feature 'restaurants' do
   context 'deleting restaurants' do
 
     before do
-      sign_up_test
+      sign_up('email@email.com')
     end
 
     before { Restaurant.create name: 'KFC'}
@@ -111,13 +111,6 @@ feature 'restaurants' do
   end
 
 
-  def sign_up_test
-    visit '/restaurants'
-    click_link 'Sign up'
-    fill_in 'Email', with: 'email@email.com'
-    fill_in 'Password', with: 'testpassword'
-    fill_in 'Password confirmation', with: 'testpassword'
-    click_button 'Sign up'
-  end
+
 
 end

@@ -13,4 +13,21 @@ feature 'reviewing' do
     expect(current_path).to eq '/restaurants'
     expect(page).to have_content 'so so'
   end
+
+  feature 'deleting a review' do
+
+    before do
+      sign_up(email@email.com)
+      create_restaurant('KFC')
+    end
+
+    scenario 'a user can only delete a review that they have writtten' do
+
+
+    end
+
+
+  end
+
+
 end
