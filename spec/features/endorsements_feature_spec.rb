@@ -6,7 +6,7 @@ feature 'endorsing reviews' do
     kfc.reviews.create(rating: 3, thoughts: 'Not bad chicken')
   end
 
-  scenario 'user can endorse review, which updates the review endorsement count' do
+  scenario 'user can endorse review, which updates the review endorsement count', js: true do
     visit '/restaurants'
     click_link 'Endorse Review'
     expect(page).to have_content('1 endorsement')
