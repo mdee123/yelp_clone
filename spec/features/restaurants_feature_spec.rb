@@ -122,4 +122,15 @@ feature 'restaurants' do
       expect(page).not_to have_content 'Delete'
     end
   end
+
+  context 'uploading images' do
+    scenario 'a user can upload an image' do
+      sign_up('email@email.com')
+      click_link 'Add a restaurant'
+      fill_in 'Name', with: "Burger"
+      attach_file("Image", Rails.root + "spec/fixtures/burger.jpeg")
+      click_button 'Create Restaurant'
+      expect(page).to have_selector("img[src$='burger.jpeg']")
+    end
+  end
 end
