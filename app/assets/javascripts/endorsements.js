@@ -3,13 +3,14 @@
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready(function() {
-  $('.endorsements-link').on('click', function(event) {
-    event.preventDefault();
 
-    var endorsermentCount = $(this).siblings('.endorserment_count');
+  $('.endorsements-link').on('click', function(event){
+      event.preventDefault();
 
-    $.post(this.href, function(response){
-      endorsermentCount.text(response.new_endorsement_count);
+      var endorsementCount = $(this).siblings('.endorsements_count');
+
+      $.post(this.href, function(response){
+        endorsementCount.text(response.new_endorsement_count);
     });
   });
 });
