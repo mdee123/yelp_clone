@@ -38,4 +38,15 @@ feature 'reviewing' do
     create_review('KFC', 'great', '5')
     expect(page).to have_content("Average rating: ★★★★☆")
   end
+
+  feature 'displays time posted' do
+    scenario 'a review posted 5 hours ago shows it is posted 5 hours ago' do
+      time_now = Time.now
+      allow(Time).to receive(:now).and_return(time_now - 5.hours)
+      create_review('KFC', 'so so', '3')
+      allow(Time).to receive(:now).and_return(time_now)
+      visit '/restaurants'
+      expect(page).to have_content('posted about 5 hours ago')
+    end
+  end
 end
